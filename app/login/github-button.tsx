@@ -10,7 +10,9 @@ export default function GitHubButton() {
     await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
-        redirectTo: `${location.origin}/auth/callback`,
+        // redirectTo: `${location.origin}/auth/callback`,
+        redirectTo: "http://localhost:3000/auth/callback",
+
       },
     });
   };

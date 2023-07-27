@@ -32,9 +32,9 @@ export default function NewTweet({ user }: { user: User }) {
         <input
           name="title"
           className="bg-inherit flex-1 ml-2 text-2xl leading-loose placeholder-gray-500 px-2"
-          placeholder="What is happening?!"
+          placeholder="Hey there! What is happening?!"
         />
-      </div>{" "}
+      </div>
     </form>
   );
 }

@@ -5,6 +5,7 @@ import Likes from "./likes";
 import { useEffect, experimental_useOptimistic as useOptimistic } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Delete from "./delete";
 
 export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
   const [optimisticTweets, addOptimisticTweet] = useOptimistic<
@@ -16,13 +17,16 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
     const index = newOptimisticTweets.findIndex(
       (tweet) => tweet.id === newTweet.id
     );
+
     newOptimisticTweets[index] = newTweet;
+
     return newOptimisticTweets;
   });
 
   //   Creates a Realtime channel with Broadcast, Presence, and Postgres Changes
   const supabase = createClientComponentClient();
   const router = useRouter();
+
   useEffect(() => {
     const channel = supabase
       .channel("realtime tweets")
@@ -65,8 +69,13 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
           <span className="text-sm ml-2 text-gray-400">
             {tweet.author.username}
           </span>
+
+          <span className="text-sm ml-2 text-gray-400">
+            <Delete tweet={tweet} />
+          </span>
         </p>
         <p>{tweet.title}</p>
+
         <Likes tweet={tweet} addOptimisticTweet={addOptimisticTweet} />
       </div>
     </div>
