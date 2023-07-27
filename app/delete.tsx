@@ -16,7 +16,6 @@ export default function Delete({ tweet }: { tweet: TweetWithAuthor }) {
     if (user) {
       await supabase.from("tweets").delete().eq("id", tweet.id);
     }
-
     
     router.refresh();
   };
