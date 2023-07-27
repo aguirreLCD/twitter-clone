@@ -4,7 +4,6 @@ import { cookies } from "next/headers";
 export default function NewTweet() {
   const handleAddNewTweet = async (formData: FormData) => {
     "use server";
-    // console.log("submitted");
     const title = String(formData.get("title"));
 
     const supabase = createServerActionClient<Database>({ cookies });
